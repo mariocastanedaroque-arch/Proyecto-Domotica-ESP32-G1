@@ -1,0 +1,87 @@
+{
+  "version": 1,
+  "author": "Integrante 1 - Hardware y Simulacion",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -48, "left": 0, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht", "top": -240, "left": 250, "attrs": {} },
+    { "type": "wokwi-photoresistor-sensor", "id": "ldr", "top": -110, "left": 295, "attrs": {} },
+    { "type": "wokwi-pir-motion-sensor", "id": "pir", "top": 60, "left": 300, "attrs": {} },
+    { "type": "wokwi-hc-sr04", "id": "ultra", "top": 235, "left": 250, "attrs": {} },
+    {
+      "type": "wokwi-led",
+      "id": "ledLuz",
+      "top": -260,
+      "left": -250,
+      "attrs": { "color": "yellow", "label": "Luz" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": -245.65,
+      "left": -153.6,
+      "rotate": 90,
+      "attrs": { "value": "220" }
+    },
+    {
+      "type": "wokwi-led",
+      "id": "ledFan",
+      "top": -110,
+      "left": -250,
+      "attrs": { "color": "blue", "label": "Ventilador" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": -101.65,
+      "left": -153.6,
+      "rotate": 180,
+      "attrs": { "value": "220" }
+    },
+    { "type": "wokwi-servo", "id": "servo", "top": 80, "left": -360, "attrs": {} },
+    { "type": "wokwi-buzzer", "id": "buzzer", "top": 250, "left": -250, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+
+    [ "dht:VCC", "esp:3V3", "red", [ "h-111.4", "v235.6" ] ],
+    [ "dht:GND", "esp:GND.1", "black", [ "v38.7", "h-63.4", "v187.4" ] ],
+    [ "dht:SDA", "esp:D15", "green", [ "v29.1", "h-173.2" ] ],
+
+    [ "ldr:VCC", "esp:3V3", "red", [ "h32.2", "v-21.2", "h-297.6", "v225.7" ] ],
+    [ "ldr:GND", "esp:GND.1", "black", [ "h22.6", "v-146.4", "h-316.8", "v331.4" ] ],
+    [ "ldr:AO", "esp:D34", "green", [ "v35.7", "h-495.8", "v33.9" ] ],
+
+    [ "pir:VCC", "esp:3V3", "red", [ "h-211.38", "v-41.5" ] ],
+    [ "pir:GND", "esp:GND.2", "black", [ "v30.4", "h-394.04", "v-81.4" ] ],
+    [ "pir:OUT", "esp:D14", "green", [ "v59.2", "h-393.92", "v-139.2" ] ],
+
+    [ "ultra:VCC", "esp:VIN", "red", [ "h-340.5", "v-219" ] ],
+    [ "ultra:GND", "esp:GND.2", "black", [ "v35.3", "h-380.1", "v-263.8" ] ],
+    [ "ultra:TRIG", "esp:D5", "blue", [ "v6.5", "h-196.9", "v-292.7" ] ],
+    [ "ultra:ECHO", "esp:D18", "blue", [ "v25.7", "h-197.3", "v-321.5" ] ],
+
+    [ "esp:D23", "r1:1", "orange", [ "h33.1", "v-244.8", "h-258.65" ] ],
+    [ "r1:2", "ledLuz:A", "orange", [ "h-96.55", "v-7.15" ] ],
+    [ "ledLuz:C", "esp:GND.1", "black", [ "v16.4", "h359.8", "v302.6" ] ],
+
+    [ "esp:D19", "r2:1", "magenta", [ "h13.9", "v-139.4", "h-201.6", "v18.9" ] ],
+    [ "r2:2", "ledFan:A", "magenta", [ "v29.1", "h-71.6" ] ],
+    [ "ledFan:C", "esp:GND.1", "black", [ "v10.4", "h359.8", "v158.6" ] ],
+
+    [ "servo:PWM", "esp:D13", "green", [ "v43", "h264", "v-100.5" ] ],
+    [ "servo:V+", "esp:VIN", "red", [ "h-4.8", "v-81.9", "h369.8" ] ],
+    [ "servo:GND", "esp:GND.2", "black", [ "v-24.4", "h365" ] ],
+
+    [ "buzzer:1", "esp:D27", "purple", [ "v11.6", "h228" ] ],
+    [ "buzzer:2", "esp:GND.2", "black", [ "h145.8", "v-238", "h72.2" ] ]
+  ],
+  "dependencies": {},
+  "serialMonitor": {
+    "display": "terminal",
+    "collapse": false,
+    "convertEol": true,
+    "newline": "lf"
+  }
+}
